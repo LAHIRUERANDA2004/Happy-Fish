@@ -115,3 +115,71 @@ h2{font-size:1.6rem}
 /* Google Identity Services renders its own accessible sign-in button here. */
 .google-login-slot{display:flex;justify-content:center;align-items:center;width:100%;min-height:44px;margin:8px auto 12px}
 .google-login-slot iframe{max-width:100%}
+
+
+/* About Game button on the mission map */
+.about-game-wrap{
+  width:min(92%,440px);
+  margin:38px auto 24px;
+  flex:none;
+}
+.about-game-btn{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:100%;
+  min-height:78px;
+  padding:13px 18px;
+  overflow:hidden;
+  border:1px solid rgba(129,235,255,.65);
+  border-radius:22px;
+  color:#fff;
+  text-decoration:none;
+  background:linear-gradient(120deg,rgba(4,45,100,.94),rgba(0,145,205,.88),rgba(7,48,105,.96));
+  box-shadow:0 8px 28px rgba(0,190,255,.24),inset 0 1px 0 rgba(255,255,255,.22);
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.about-game-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.16) 48%,transparent 72%);
+  transform:translateX(-120%);
+  transition:transform .65s ease;
+  pointer-events:none;
+}
+.about-game-btn:hover,
+.about-game-btn:focus-visible{
+  transform:translateY(-3px);
+  border-color:#9af3ff;
+  box-shadow:0 12px 34px rgba(0,210,255,.38),inset 0 1px 0 rgba(255,255,255,.28);
+  outline:none;
+}
+.about-game-btn:hover::before{transform:translateX(120%)}
+.about-game-icon{
+  display:grid;
+  place-items:center;
+  flex:0 0 48px;
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.22);
+  font-size:1.65rem;
+}
+.about-game-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
+.about-game-copy strong{font:700 1.12rem Fredoka,sans-serif;letter-spacing:.02em}
+.about-game-copy small{font-size:.78rem;color:#c6efff}
+.about-game-arrow{font:400 2rem Fredoka,sans-serif;color:#aaf5ff;line-height:1}
+@media(max-width:480px){
+  .about-game-wrap{width:calc(100% - 34px);margin:30px auto 20px}
+  .about-game-btn{min-height:72px;padding:11px 14px;gap:11px;border-radius:19px}
+  .about-game-icon{width:44px;height:44px;flex-basis:44px;font-size:1.45rem}
+  .about-game-copy strong{font-size:1rem}
+  .about-game-copy small{font-size:.72rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .about-game-btn,.about-game-btn::before{transition:none}
+}
