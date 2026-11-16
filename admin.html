@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Fish — Admin</title><link rel="stylesheet" href="admin.css"></head>
+<body><main class="shell"><header><div><h1>🐠 Happy Fish Admin</h1><p>Manage players and mission access</p></div><a href="index.html">Open game ↗</a></header>
+<section id="loginPanel" class="panel"><h2>Administrator login</h2>
+<form id="loginForm"><label>Admin password<input id="adminPassword" type="password" autocomplete="current-password" required></label>
+<button>Continue with Google</button><p id="loginMessage" role="alert"></p></form>
+<p class="hint">Enter the admin password, then sign in with the approved admin Google account.</p></section>
+<section id="dashboard" hidden><div class="toolbar"><h2>Players</h2><button id="refresh">Refresh</button><button id="logout" class="secondary">Log out</button></div>
+<p id="status" aria-live="polite"></p><div class="tablewrap"><table><thead><tr><th>Player</th><th>Email</th><th>Unlocked</th><th>Coins / Gems</th><th>Mission access</th></tr></thead><tbody id="players"></tbody></table></div></section></main>
+<script src="config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="admin.js"></script></body></html>

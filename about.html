@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intro</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020b1e;--ink:#eaf6ff;--mut:#9cc3e6;--cy:#22e4ff;--bl:#0a84ff;--co:#ff6b6b;--go:#ffd54a;--gr:#5dffa0;--pu:#b794ff;--card:rgba(10,35,75,.58);--line:rgba(255,255,255,.17);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#020b1e;--ink:#eaf6ff}}
+:root[data-theme="dark"]{--bg:#020b1e;--ink:#eaf6ff}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
+*{box-sizing:border-box;margin:0}
+body{height:100%;background:var(--bg);color:var(--ink);font:400 clamp(14px,1.4vw,20px)/1.5 Inter,system-ui,sans-serif;overflow:hidden;-webkit-user-select:none;user-select:none}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+#prog{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:4px;z-index:55;background:rgba(255,255,255,.08)}
+#prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bl),var(--cy),var(--gr));box-shadow:0 0 14px var(--cy);transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.slide{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,2.2vh,24px);padding:calc(env(safe-area-inset-top,0px) + clamp(18px,5vh,54px)) clamp(18px,6vw,110px) calc(env(safe-area-inset-bottom,0px) + 84px);overflow:auto;opacity:0;visibility:hidden;transform:scale(.95) translateY(24px);filter:blur(10px);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1),filter .7s,visibility 0s .8s}
+.slide.past{transform:scale(1.04) translateY(-18px)}
+.slide.on{opacity:1;visibility:visible;transform:none;filter:none;transition:opacity .7s .1s,transform .8s .1s cubic-bezier(.2,.8,.2,1),filter .7s .1s,visibility 0s}
+[data-a]{opacity:0}
+.on [data-a]{animation:rise .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*.09s + .25s)}
+.on [data-a=l]{animation-name:inl}.on [data-a=r]{animation-name:inr}.on [data-a=z]{animation-name:inz}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes inl{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:none}}
+@keyframes inr{from{opacity:0;transform:translateX(80px)}to{opacity:1;transform:none}}
+@keyframes inz{from{opacity:0;transform:scale(.6) rotate(-4deg)}to{opacity:1;transform:none}}
+.k{font:600 .8em Inter;letter-spacing:.22em;text-transform:uppercase;color:var(--cy)}
+.h{font:700 clamp(28px,4.8vw,68px)/1.05 Fredoka,sans-serif;background:linear-gradient(180deg,#fff 20%,#8fe8ff 70%,#3aa8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:1.2em;color:var(--mut);max-width:62ch}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(14px,1.8vw,26px);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden;transition:transform .35s,border-color .35s,box-shadow .35s}
+.card::after{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(34,228,255,.35) 85%,transparent);animation:spin 6s linear infinite;opacity:0;transition:opacity .4s;pointer-events:none;-webkit-mask:linear-gradient(#000 0 0);}
+.card:hover{transform:translateY(-6px);border-color:var(--cy);box-shadow:0 18px 50px rgba(0,160,255,.25)}
+.grid{display:grid;gap:clamp(10px,1.4vw,20px)}.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.row{display:flex;gap:clamp(12px,2vw,32px);align-items:center;flex-wrap:wrap}.row>*{flex:1 1 320px}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes spinr{to{transform:rotate(-360deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(34,228,255,.55)}50%{box-shadow:0 0 0 16px rgba(34,228,255,0)}}
+@keyframes flow{to{stroke-dashoffset:-28}}
+.ic{font-size:2.2em;line-height:1;display:inline-block;animation:bob 3s ease-in-out infinite}
+h3{font:600 1.35em Fredoka,sans-serif;margin:.2em 0}.mut{color:var(--mut)}
+a.url{display:inline-block;padding:.7em 1.4em;border-radius:99px;background:linear-gradient(110deg,#0a84ff,#22e4ff,#0a84ff);background-size:200% 100%;animation:shine 3s linear infinite;color:#02152e;font:700 1.15em Fredoka;text-decoration:none;box-shadow:0 10px 40px rgba(34,228,255,.45)}
+@keyframes shine{to{background-position:-200% 0}}
+.t{font:700 clamp(54px,11vw,170px)/1 Fredoka,sans-serif;white-space:nowrap}
+.t span{display:inline-block;background:linear-gradient(180deg,#fff,#7fe9ff 55%,#1f9bff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 28px rgba(34,160,255,.6))}
+.on .t span{animation:drop .9s cubic-bezier(.2,1.4,.3,1) calc(var(--n)*.07s) both,wave 3.2s ease-in-out calc(1.2s + var(--n)*.12s) infinite}
+@keyframes drop{from{opacity:0;transform:translateY(-120px) rotate(-18deg) scale(.4)}to{opacity:1;transform:none}}
+@keyframes wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hint{font-size:.85em;color:var(--mut)}
+canvas.demo{width:100%;height:clamp(200px,42vh,420px);border-radius:20px;border:1px solid var(--line);background:linear-gradient(#0a4f9a,#04204f)}
+.big{font:700 clamp(30px,4vw,54px) Fredoka;color:var(--cy)}
+.chip{display:inline-flex;gap:.4em;align-items:center;padding:.35em .8em;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.9em;margin:3px}
+.step{display:flex;gap:14px;align-items:flex-start;padding:10px 14px;border-radius:16px;border:1px solid transparent;transition:.4s}
+.step b{flex:none;width:2em;height:2em;border-radius:50%;display:grid;place-items:center;background:#0a2d5c;border:1px solid var(--line);font-family:Fredoka}
+.step.hi{background:rgba(34,228,255,.12);border-color:var(--cy);transform:translateX(10px)}.step.hi b{background:var(--cy);color:#02152e}
+pre{font:400 clamp(11px,1.05vw,15px)/1.55 'JetBrains Mono',monospace;background:rgba(2,11,30,.85);border:1px solid var(--line);border-radius:16px;padding:16px;overflow:auto;white-space:pre;min-height:5em;color:#d6ecff}
+pre i{font-style:normal}.c{color:#6f93b8}.s{color:var(--gr)}.w{color:#ff9ed8}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:12px;padding:.8em 1.4em;border-radius:16px;background:#fff;color:#222;font:600 1em Inter;animation:glow 2s infinite}
+.gbtn b{font:700 1.2em Fredoka;background:conic-gradient(#ea4335 0 25%,#fbbc05 0 50%,#34a853 0 75%,#4285f4 0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.av{width:clamp(70px,9vw,120px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:clamp(36px,5vw,64px);background:radial-gradient(circle at 30% 30%,#22e4ff,#0a84ff 60%,#002661);border:3px solid #fff;box-shadow:0 0 30px rgba(34,228,255,.7);transition:transform .4s cubic-bezier(.2,1.6,.3,1)}
+.emo{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.emo button{font-size:clamp(20px,2.4vw,34px);padding:6px;border-radius:14px;border:2px solid var(--line);background:rgba(255,255,255,.07);cursor:pointer;transition:.25s}.emo button:hover{transform:scale(1.15) rotate(-6deg)}.emo button.on{border-color:var(--cy);box-shadow:0 0 16px rgba(34,228,255,.7)}
+.stat{padding:8px 12px;border-radius:14px;background:rgba(255,255,255,.07);font-size:.78em;color:var(--mut)}.stat b{display:block;font:600 1.6em Fredoka;color:var(--ink)}
+.mc{cursor:default;text-align:center;padding:12px 8px}.mc .e{font-size:2em}.mc small{display:block;color:var(--cy);font-weight:600}.mc div.m{height:5px;border-radius:5px;background:rgba(255,255,255,.12);margin-top:8px;overflow:hidden}.mc div.m i{display:block;height:100%;background:linear-gradient(90deg,var(--gr),var(--go),var(--co));transform-origin:left;transform:scaleX(0)}.on .mc div.m i{animation:grow 1.2s cubic-bezier(.2,.8,.2,1) .8s both}
+@keyframes grow{to{transform:scaleX(var(--d))}}
+#orb{position:relative;width:min(62vmin,100%);aspect-ratio:1;margin:0 auto}
+.ring{position:absolute;left:50%;top:50%;width:var(--d);height:var(--d);margin:calc(var(--d)/-2) 0 0 calc(var(--d)/-2);border:1px dashed rgba(255,255,255,.22);border-radius:50%;animation:spin var(--s) linear infinite}
+.bd{position:absolute;left:50%;top:50%;transform:rotate(var(--a)) translateX(calc(var(--d)/2))}.bd>div{animation:spinr var(--s) linear infinite}.bd>div>span{display:block;transform:rotate(calc(-1*var(--a)));translate:-50% -50%;white-space:nowrap;padding:.3em .75em;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.78em;backdrop-filter:blur(8px)}
+#core{position:absolute;left:50%;top:50%;translate:-50% -50%;font-size:clamp(50px,9vmin,100px);animation:bob 3s ease-in-out infinite;filter:drop-shadow(0 0 30px #22e4ff)}
+svg text{font-family:Fredoka,sans-serif;fill:#eaf6ff}svg .sm{font:400 12px Inter;fill:#9cc3e6}
+.flowp{fill:none;stroke:rgba(34,228,255,.55);stroke-width:2;stroke-dasharray:6 8;animation:flow 1s linear infinite}
+.nd{fill:rgba(10,35,75,.9);stroke:rgba(255,255,255,.25)}
+#dark{position:relative;height:clamp(150px,26vh,260px);border-radius:20px;overflow:hidden;background:#07244a;border:1px solid var(--line);touch-action:none}
+#dark span{position:absolute;font-size:2em}#dark::after{content:"";position:absolute;inset:0;background:radial-gradient(circle 90px at var(--x,50%) var(--y,50%),transparent 0,rgba(0,3,12,.97) 100%)}
+.hz{display:inline-block;animation:bob 2.4s ease-in-out infinite}
+.sc{position:relative;height:clamp(150px,26vh,250px);border-radius:20px;overflow:hidden;background:linear-gradient(#1fa4e6,#06306a);border:1px solid var(--line)}
+.sc span{position:absolute;font-size:2em;animation:drift var(--t) ease-in-out infinite alternate}
+@keyframes drift{from{left:var(--x1);top:var(--y1)}to{left:var(--x2);top:var(--y2)}}
+.tbar{height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden}.tbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gr),var(--go),var(--co));animation:tb 6s linear infinite}
+@keyframes tb{from{width:100%}to{width:0}}
+.eq{display:flex;gap:4px;align-items:flex-end;height:34px}.eq i{width:6px;background:var(--cy);border-radius:3px;animation:eqa .9s ease-in-out infinite alternate}
+@keyframes eqa{from{height:6px}to{height:34px}}
+.bub{display:inline-grid;place-items:center;width:2.4em;height:2.4em;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#00aaff);color:#021a3d;font:700 1em Fredoka;animation:bob 2.2s ease-in-out infinite}
+table{width:100%;border-collapse:collapse;font-size:.85em}th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}th{color:var(--cy)}td button{padding:4px 10px;border-radius:10px;border:0;background:var(--bl);color:#fff;font-weight:600}
+#nav{position:fixed;z-index:56;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);translate:-50% 0;display:flex;gap:8px;align-items:center;padding:6px 10px;border-radius:99px;background:var(--card);border:1px solid var(--line);backdrop-filter:blur(14px)}
+#nav button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.1);color:#fff;font-size:18px;cursor:pointer}#nav button:hover{background:var(--bl)}
+#nav button:focus-visible,a:focus-visible{outline:3px solid var(--cy);outline-offset:2px}#ct{min-width:64px;text-align:center;font-weight:600;font-size:.9em}
+#tm{position:fixed;z-index:56;left:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);padding:5px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);font:600 .85em 'JetBrains Mono',monospace;display:none}
+#nt{position:fixed;z-index:56;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);max-width:min(420px,42vw);padding:10px 14px;border-radius:16px;background:rgba(2,11,30,.92);border:1px solid var(--cy);font-size:.82em;display:none}
+@media (max-width:700px){#nt{max-width:calc(100vw - 28px);bottom:calc(env(safe-area-inset-bottom,0px) + 64px)}.t{font-size:clamp(44px,15vw,90px)}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas><div id="prog"><i></i></div>
+
+<section class="slide" id="s1" style="align-items:center;text-align:center">
+  <p class="k" data-a>About game</p>
+  <h1 class="t" id="ttl" aria-label="Happy Fish"></h1>
+  <p class="lead" data-a>An ocean adventure with 15 missions, Google sign-in and cloud saves</p>
+  <div data-a="z"><a class="url" href="https://www.happyfish.run.place/" target="_blank" rel="noopener">🌐 www.happyfish.run.place</a></div>
+  <p class="hint" data-a>Press → or Space to dive in · F fullscreen · T timer · N notes</p>
+</section>
+
+<section class="slide" id="s2">
+  <p class="k" data-a>Agenda</p><h2 class="h" data-a>What we will cover</h2>
+  <div class="grid g2" id="agenda"></div>
+</section>
+
+<section class="slide" id="s3">
+  <p class="k" data-a>The game</p><h2 class="h" data-a>Meet Happy Fish 🐠</h2>
+  <div class="row">
+    <div><p class="lead" data-a="l">Happy Fish is a browser arcade game. You are a small fish in a busy reef: eat the fish smaller than you, run from the bigger ones and grow into the king of the ocean.</p>
+      <p style="margin:14px 0" data-a="l"><span class="chip">🌐 Plays in any browser</span><span class="chip">📱 Phone and computer</span><span class="chip">💾 Cloud saves</span><span class="chip">🔊 With sound</span></p>
+      <div data-a="l"><a class="url" href="https://www.happyfish.run.place/" target="_blank" rel="noopener">▶ Play: happyfish.run.place</a></div></div>
+    <div class="grid g2">
+      <div class="card" data-a="z"><div class="big" data-count="15">0</div>missions</div>
+      <div class="card" data-a="z"><div class="big" data-count="15">0</div>counting gates</div>
+      <div class="card" data-a="z"><div class="big" data-count="4">0</div>kinds of fish</div>
+      <div class="card" data-a="z"><div class="big" data-count="8">0</div>profile fish</div>
+    </div></div>
+</section>
+
+<section class="slide" id="s4">
+  <h2 class="h" data-a>Eat green. Flee red. Grow.</h2>
+  <div class="row"><canvas class="demo" id="demo" data-a="z" aria-label="Live simulation of the game"></canvas>
+    <div class="grid"><div class="card" data-a="r"><span class="ic">🟢</span><h3>Smaller fish glow green</h3><span class="mut">Catch them to score points and grow.</span></div>
+      <div class="card" data-a="r"><span class="ic">🔴</span><h3>Bigger fish glow red</h3><span class="mut">Touch one and you lose a heart.</span></div>
+      <div class="card" data-a="r"><span class="ic">⭐</span><h3>Hearts left = stars</h3><span class="mut">Up to 3 stars per mission earn coins and gems.</span></div></div></div>
+</section>
+
+<section class="slide" id="s5">
+  <p class="k" data-a>Login and sign in</p><h2 class="h" data-a>One tap with Google</h2>
+  <div class="row">
+    <div class="card" data-a="l" style="text-align:center;max-width:420px"><div class="av" style="margin:0 auto 10px">🐠</div><h3 style="font-size:2em">HAPPY FISH</h3><p class="mut" style="margin-bottom:16px">Dive into the deep blue ocean adventure!</p><div class="gbtn"><b>G</b>Continue with Google</div><p class="hint" style="margin-top:12px">Firebase Authentication · popup with redirect fallback</p></div>
+    <div id="lsteps"></div></div>
+</section>
+
+<section class="slide" id="s6">
+  <p class="k" data-a>Profile page</p><h2 class="h" data-a>Your captain’s profile</h2>
+  <div class="row">
+    <div class="card" data-a="l" style="max-width:520px"><div style="display:flex;gap:16px;align-items:center;margin-bottom:12px"><div class="av" id="pav">🐠</div><div><h3 style="margin:0">Captain Bubbles</h3><span class="mut">Captain rank 7</span></div></div>
+      <p class="hint" style="margin-bottom:6px">📁 Upload a picture, or tap a fish:</p><div class="emo" id="emo"></div>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:12px"><div class="stat"><b data-count="24">0</b>Missions played</div><div class="stat"><b data-count="15">0</b>Missions won</div><div class="stat"><b data-count="92" data-suf="%">0</b>Gate accuracy</div><div class="stat"><b data-count="1284">0</b>Fish eaten</div><div class="stat"><b data-count="31" data-suf=" / 45">0</b>Stars</div><div class="stat"><b data-count="8640">0</b>Best score</div></div></div>
+    <div class="grid"><div class="card" data-a="r">👆 Tap your picture on the map to open the profile.</div><div class="card" data-a="r">🖼️ Upload a photo from a computer or phone, or pick one of 8 fish emojis.</div><div class="card" data-a="r">📊 See missions and rounds played, accuracy, stars and best score.</div><div class="card" data-a="r">☁️ Saved in the cloud, so the same profile follows you to any device.</div></div></div>
+</section>
+
+<section class="slide" id="s7">
+  <p class="k" data-a>The map</p><h2 class="h" data-a>15 missions along the reef</h2>
+  <div class="card" data-a="z" style="padding:8px"><svg id="map" viewBox="0 0 1000 340" style="width:100%;display:block" role="img" aria-label="Mission map"></svg></div>
+  <p class="lead" id="mcap" data-a>Hover a mission. Missions unlock one at a time; stars show your best result.</p>
+</section>
+
+<section class="slide" id="s8">
+  <p class="k" data-a>About missions</p><h2 class="h" data-a>Each one longer and harder</h2>
+  <div class="grid" id="mgrid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))"></div>
+</section>
+
+<section class="slide" id="s9">
+  <p class="k" data-a>Mission ingredients</p><h2 class="h" data-a>Stages and hazards</h2>
+  <div class="row"><div data-a="l"><h3>Stage types</h3><p><span class="chip">🍽️ Eat</span><span class="chip">📏 Grow</span><span class="chip">🦪 Pearls</span><span class="chip">⏱️ Survive</span><span class="chip">🎨 Colour hunt</span><span class="chip">🔥 Combo</span><span class="chip">💗 Rescue</span><span class="chip">✨ Golden fish</span></p>
+    <h3 style="margin-top:14px">Hazards</h3><p style="font-size:1.4em"><span class="chip"><i class="hz">🪼</i>Jellyfish</span><span class="chip"><i class="hz" style="animation-delay:.3s">🌊</i>Currents</span><span class="chip"><i class="hz" style="animation-delay:.6s">🎣</i>Nets</span><span class="chip"><i class="hz" style="animation-delay:.9s">🦈</i>Sharks</span><span class="chip"><i class="hz" style="animation-delay:1.2s">👑</i>Boss</span></p></div>
+    <div data-a="r"><h3>🌑 Night Dive: find the pearls</h3><div id="dark"><span style="left:12%;top:30%">🦪</span><span style="left:70%;top:60%">🦪</span><span style="left:40%;top:70%">🐟</span><span style="left:82%;top:20%">🦈</span><span style="left:28%;top:12%">🦪</span></div><p class="hint">Move your pointer: the fish’s glow is your only light.</p></div></div>
+</section>
+
+<section class="slide" id="s10">
+  <p class="k" data-a>Access gates</p><h2 class="h" data-a>Count the fish to unlock a mission</h2>
+  <div class="row"><div class="grid" id="ladder"></div>
+    <div data-a="r"><div class="sc" id="scn"></div><div class="tbar" style="margin:10px 0"><i></i></div>
+      <div class="row" style="flex-wrap:nowrap"><span style="flex:none">How many fish?</span><span class="bub">2</span><span class="bub" style="animation-delay:.4s">3</span><span class="bub" style="animation-delay:.8s">5</span>
+      <span style="flex:none;font-size:1.8em">📷</span><span class="eq" style="flex:none"><i></i><i style="animation-delay:.2s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.3s"></i></span></div></div></div>
+</section>
+
+<section class="slide" id="s11">
+  <p class="k" data-a>Technologies</p><h2 class="h" data-a>What the game is made of</h2>
+  <div id="orb" data-a="z"><div id="core">🐠</div></div>
+</section>
+
+<section class="slide" id="s12">
+  <p class="k" data-a>Architecture</p>
+  <div class="card" data-a="z" style="padding:8px"><svg id="arch" viewBox="0 0 1000 410" style="width:100%;display:block" role="img" aria-label="Architecture diagram"></svg></div>
+</section>
+
+<section class="slide" id="s13">
+  <p class="k" data-a>Google authentication</p><h2 class="h" data-a>Sign in without passwords</h2>
+  <div class="row"><div id="asteps"></div>
+    <div data-a="r"><pre id="c1" aria-label="Sign-in code"></pre><div class="card" style="margin-top:12px">🔒 The Firebase web config is public by design. No OAuth client secret or service key is ever placed in the front end. Allowed domains: <b>happyfish.run.place</b> and <b>www.happyfish.run.place</b>.</div></div></div>
+</section>
+
+<section class="slide" id="s14">
+  <p class="k" data-a>Database</p><h2 class="h" data-a>Cloud Firestore saves every player</h2>
+  <div class="row" data-a style="flex-wrap:nowrap;justify-content:center;text-align:center;font-size:1.05em"><span class="card" style="flex:none">🎮 save()</span><span class="big">→</span><span class="card" style="flex:none">⚡ localStorage<br><small class="mut">instant</small></span><span class="big">→</span><span class="card" style="flex:none">⏳ wait 650 ms<br><small class="mut">debounce</small></span><span class="big">→</span><span class="card" style="flex:none">☁️ Firestore<br><small class="mut">users/{uid}</small></span></div>
+  <div class="row"><pre id="c2" data-a="l"></pre><pre id="c3" data-a="r"></pre></div>
+</section>
+
+<section class="slide" id="s15">
+  <p class="k" data-a>Hosting</p><h2 class="h" data-a>Published with GitHub Pages</h2>
+  <div class="row"><div class="card" data-a="l"><pre id="tree" style="background:none;border:0;padding:0;min-height:0"></pre></div>
+    <div><div class="grid" id="deploy"></div><p style="margin-top:14px" data-a="r"><a class="url" href="https://www.happyfish.run.place/" target="_blank" rel="noopener">🌐 https://www.happyfish.run.place/</a></p></div></div>
+</section>
+
+<section class="slide" id="s16">
+  <p class="k" data-a>Admin website</p><h2 class="h" data-a>A separate dashboard for the owner</h2>
+  <div class="row"><div class="card" data-a="l"><table><thead><tr><th>Player</th><th>Unlocked</th><th>Coins / Gems</th><th></th></tr></thead><tbody>
+    <tr><td>Captain Bubbles</td><td>7 / 15</td><td>🪙 3,420 / 💎 52</td><td><button>Unlock</button></td></tr><tr><td>Marina</td><td>3 / 15</td><td>🪙 900 / 💎 12</td><td><button>Unlock</button></td></tr><tr><td>Finn</td><td>15 / 15</td><td>🪙 9,800 / 💎 140</td><td><button>All 15</button></td></tr></tbody></table><p class="hint" style="margin-top:8px">Illustration of admin.html</p></div>
+    <div class="grid"><div class="card" data-a="r">🔑 Admin password, then Google sign-in with the one approved admin email.</div><div class="card" data-a="r">🛡️ Firestore rules decide who can read or change data: players only their own, the admin everyone.</div><div class="card" data-a="r">⚠️ Honest limit: a static page cannot hide a password or stop a determined cheater. Trusted rewards need server code.</div></div></div>
+</section>
+
+<section class="slide" id="s17">
+  <p class="k" data-a>More details</p><h2 class="h" data-a>Smart tricks inside the code</h2>
+  <div class="grid g4">
+    <div class="card" data-a="z"><span class="ic">🔊</span><h3>Web Audio</h3><span class="mut">Every sound and the home song are synthesised with oscillators. No audio files.</span></div>
+    <div class="card" data-a="z"><span class="ic">📷</span><h3>Finger counting</h3><span class="mut">Skin-colour mask, palm centre from a distance transform, then fingers counted as arcs.</span></div>
+    <div class="card" data-a="z"><span class="ic">🎤</span><h3>Clap counting</h3><span class="mut">The microphone level is watched for sharp peaks, one per clap.</span></div>
+    <div class="card" data-a="z"><span class="ic">💰</span><h3>Continue</h3><span class="mut">After a defeat, pay 500 coins or 10 gems to restart the same stage.</span></div></div>
+</section>
+
+<section class="slide" id="s18" style="align-items:center;text-align:center">
+  <p class="k" data-a>Thank you</p><h2 class="h" style="font-size:clamp(40px,8vw,120px)" data-a>Questions? 🐠</h2>
+  <div data-a="z"><a class="url" href="https://www.happyfish.run.place/" target="_blank" rel="noopener">▶ www.happyfish.run.place</a></div>
+  <p data-a><span class="chip">🏆 Leaderboard</span><span class="chip">🛡️ Server-checked rewards</span><span class="chip">📲 Installable app</span><span class="chip">🐟 More missions and skins</span></p>
+</section>
+
+<nav id="nav" aria-label="Slides"><button id="pv" aria-label="Previous slide">‹</button><span id="ct"></span><button id="nx" aria-label="Next slide">›</button><button id="fs" aria-label="Fullscreen">⛶</button></nav>
+<div id="tm"></div><div id="nt"></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],rnd=(a,b)=>a+Math.random()*(b-a);
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const hl=t=>esc(t).replace(/(\/\/.*$)/gm,'<i class="c">$1</i>').replace(/('[^'\n]*')/g,'<i class="s">$1</i>').replace(/\b(const|await|if|match|allow|function|if|async)\b/g,'<i class="w">$1</i>');
+const NOTES=[[.5,'Welcome. This is Happy Fish. Show the website address.'],[.5,'Eight parts: game, sign in, profile, map, missions, technologies, backend, wrap-up.'],[1,'What the game is and who can play it. Mention the numbers.'],[1.5,'Explain the rule: green is food, red is danger. The fish is playing by itself.'],[1.5,'Login: one Google button. Walk through the five steps.'],[1.5,'Profile: tap an emoji to change the avatar. Mention upload and results.'],[1,'The map: 15 missions, unlock one by one, stars on each node.'],[1.5,'Mission list. Hover a few cards and read the story.'],[.5,'Stage types and hazards. Try the dark spotlight.'],[1.5,'Gates: five levels of difficulty, plus camera and microphone answers.'],[1,'Technologies as orbits: foundation, browser features, cloud.'],[1.5,'Architecture: follow the moving dots from GitHub to the browser to Firebase.'],[1.5,'Google authentication step by step, and why the config is public.'],[1.5,'Database: save locally first, then to Firestore. Read the rules.'],[1,'Hosting on GitHub Pages and the custom domain.'],[1,'Admin site and the honest security limits.'],[.5,'Extra tricks: sound synthesis, camera, microphone, continue.'],[1,'Thank you. Open for questions. Mention the ideas.']];
+const slides=$$('.slide');slides.forEach(s=>$$('[data-a]',s).forEach((e,i)=>e.style.setProperty('--i',i)));
+
+/* ---------- shared drawing ---------- */
+const PAL=[['#00f2fe','#0072ff'],['#ffb347','#ff5e62'],['#a8ff78','#38a169'],['#d4a5ff','#7f00ff'],['#ff9ed8','#ff007f'],['#fff27a','#ff9800']];
+function fishD(c,x,y,s,dir,p,t,glow){c.save();c.translate(x,y);c.scale(dir,1);if(glow){c.shadowColor=glow;c.shadowBlur=s*.9}
+  c.fillStyle=p[1];c.beginPath();const w=Math.sin(t)*s*.2;c.moveTo(-s*.8,0);c.lineTo(-s*1.5,-s*.55+w);c.lineTo(-s*1.5,s*.55+w);c.fill();
+  const g=c.createRadialGradient(s*.2,-s*.2,s*.1,0,0,s);g.addColorStop(0,'#fff');g.addColorStop(.35,p[0]);g.addColorStop(1,p[1]);c.fillStyle=g;c.beginPath();c.ellipse(0,0,s,s*.64,0,0,7);c.fill();c.shadowBlur=0;
+  c.fillStyle='#fff';c.beginPath();c.arc(s*.5,-s*.18,s*.2,0,7);c.fill();c.fillStyle='#111';c.beginPath();c.arc(s*.56,-s*.18,s*.1,0,7);c.fill();c.restore()}
+const loops=new Set();(function tick(n){loops.forEach(f=>f(n));requestAnimationFrame(tick)})(0);
+function fit(cv){const r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;const c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);return[c,r.width,r.height]}
+
+/* ---------- animated ocean background ---------- */
+(function(){const cv=$('#bg');let c,W,H,mx=.5,my=.5;const rs=()=>{[c,W,H]=fit(cv)};rs();addEventListener('resize',rs);
+  addEventListener('pointermove',e=>{mx=e.clientX/innerWidth;my=e.clientY/innerHeight});
+  const B=Array.from({length:70},()=>({x:Math.random(),y:Math.random(),r:rnd(1.5,6),s:rnd(.0006,.002),z:rnd(.2,1)}));
+  const F=Array.from({length:10},(_,i)=>({x:Math.random(),y:rnd(.15,.85),s:rnd(14,34),v:rnd(.00008,.0003)*(i%2?1:-1),p:PAL[i%6],t:rnd(0,6)}));
+  loops.add(n=>{const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0a4f9a');g.addColorStop(.45,'#052a63');g.addColorStop(1,'#020b1e');c.fillStyle=g;c.fillRect(0,0,W,H);
+    for(let k=0;k<6;k++){const x=((k*.2+Math.sin(n*.0002+k)*.08)*W)+(mx-.5)*-40,gr=c.createLinearGradient(x,0,x+W*.15,H);gr.addColorStop(0,'rgba(120,230,255,.16)');gr.addColorStop(1,'rgba(120,230,255,0)');c.fillStyle=gr;c.beginPath();c.moveTo(x,0);c.lineTo(x+W*.1,0);c.lineTo(x+W*.3,H);c.lineTo(x+W*.12,H);c.fill()}
+    B.forEach(b=>{b.y-=b.s;if(b.y<-.05){b.y=1.05;b.x=Math.random()}c.beginPath();c.arc(b.x*W+(mx-.5)*60*b.z,b.y*H,b.r*b.z+1,0,7);c.fillStyle='rgba(160,240,255,'+(.15+b.z*.3)+')';c.fill()});
+    F.forEach(f=>{f.x+=f.v*16;f.t+=.12;if(f.x>1.1)f.x=-.1;if(f.x<-.1)f.x=1.1;c.globalAlpha=.32;fishD(c,f.x*W+(mx-.5)*-30,f.y*H+(my-.5)*-20,f.s,f.v>0?1:-1,f.p,f.t);c.globalAlpha=1})})})();
+
+/* ---------- slide content builders ---------- */
+$('#ttl').innerHTML=[...'Happy Fish'].map((ch,i)=>'<span style="--n:'+i+'">'+(ch===' '?'&nbsp;':ch)+'</span>').join('');
+const AG=[['🎮','Game and website'],['🔑','Login and sign in','1.5'],['👤','Profile page','1.5'],['🗺️','The mission map','1'],['🎯','Missions and gates','3.5'],['🧰','Technologies used','2.5'],['☁️','Google auth, database, hosting','4'],['🛠️','Admin, extras and questions','2.5']];
+$('#agenda').innerHTML=AG.map((a,i)=>'<div class="card" data-a="'+(i%2?'r':'l')+'" style="display:flex;gap:14px;align-items:center"><span class="ic" style="font-size:1.8em">'+a[0]+'</span><div style="flex:1"><b style="font:600 1.15em Fredoka">'+(i+1)+'. '+a[1]+'</b></div><span class=""></span></div>').join('');
+function steps(id,list){$(id).innerHTML=list.map((t,i)=>'<div class="step" data-a="l"><b>'+(i+1)+'</b><span>'+t+'</span></div>').join('')}
+steps('#lsteps',['Tap, Continue with Google','Google shows the account chooser (select_account)','Firebase Auth creates the user: uid, email, name and photo','The game loads the cloud profile, or creates a new one','New players choose a name and picture, then the map opens']);
+steps('#asteps',['The player taps the Google button','signInWithPopup opens the Google account window','Google confirms the identity and returns it to Firebase','Firebase gives the game a signed-in user with a uid','onAuthStateChanged loads users/{uid} from Firestore','Popup blocked? signInWithRedirect is the fallback']);
+$('#emo').innerHTML=['🐠','🐟','🐡','🦈','🐬','🐳','🦑','🐙'].map((e,i)=>'<button'+(i?'':' class="on"')+' aria-label="Use '+e+'">'+e+'</button>').join('');
+$('#emo').onclick=e=>{const b=e.target.closest('button');if(!b)return;$$('#emo button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const a=$('#pav');a.style.transform='scale(.4) rotate(-90deg)';setTimeout(()=>{a.textContent=b.textContent;a.style.transform=''},180)};
+const MS=[['🐟','Shallow Start','Learn to swim, eat smaller fish and grab your first pearls.'],['🌱','Growing Up','Eat your way up to a giant.'],['🦪','Pearl Diver','Pearls sink in bursts. Collect them all.'],['🪼','Stinging Jellies','Dodge drifting jellyfish.'],['🎨','Colour Hunt','Eat only the fish with the glowing ring.'],['🌊','Strong Current','A tide pushes you sideways.'],['💗','Baby Rescue','Touch lost baby fish to bring them home.'],['🔥','Combo Reef','Eat back to back before the combo timer ends.'],['🌑','Night Dive','Lights out. Only your own glow shows the way.'],['🦈','Shark Alley','A hungry shark hunts you down.'],['🎣','Fishing Nets','Slip through sweeping nets.'],['✨','Golden Chase','Golden fish sprint away. Catch them!'],['⛈️','Storm Surge','Current, nets and jellyfish all at once.'],['🕳️','Deep Trench','Black water, a shark and jellyfish.'],['👑','The Megalodon','The boss shark plus every hazard.']];
+$('#mgrid').innerHTML=MS.map((m,i)=>'<div class="card mc" data-a="z" data-i="'+i+'"><span class="e">'+m[0]+'</span><small>Mission '+(i+1)+'</small><b>'+m[1]+'</b><div class="m"><i style="--d:'+((i+1)/15).toFixed(2)+'"></i></div></div>').join('');
+$('#mgrid').onpointerover=e=>{const c=e.target.closest('.mc');if(c){const m=MS[c.dataset.i];$('#mdesc').textContent=m[0]+' '+m[1]+': '+m[2]}};
+$('#ladder').innerHTML=[['1','Still picture','Count and type the number.'],['2','Against the clock','A countdown starts.'],['3','Moving picture','The image drifts around.'],['4','Moving answers','Tap the right bubble in time.'],['5+','Memory, blur and fog','Flashes, fog, several rounds in a row.']].map((s,i)=>'<div class="card" data-a="l" style="display:flex;gap:14px;align-items:center;padding:10px 16px"><b class="big" style="min-width:1.6em">'+s[0]+'</b><div><b>'+s[1]+'</b><br><span class="mut">'+s[2]+'</span></div></div>').join('');
+$('#scn').innerHTML=['🐟','🐠','🐡','🧰','🧰','🧰','🧰'].map((e,i)=>'<span style="--x1:'+Math.round(rnd(0,85))+'%;--y1:'+Math.round(rnd(0,70))+'%;--x2:'+Math.round(rnd(0,85))+'%;--y2:'+Math.round(rnd(0,70))+'%;--t:'+rnd(3,6).toFixed(1)+'s">'+e+'</span>').join('');
+const RINGS=[[26,16,[['HTML5','🧱'],['CSS3','🎨'],['JavaScript','⚡']]],[44,26,[['Canvas 2D','🖌️'],['Web Audio','🔊'],['Camera + Mic','📷'],['localStorage','💾']]],[62,38,[['Google Sign-In','🔐'],['Firebase Auth','🔥'],['Cloud Firestore','🗄️'],['GitHub Pages','🐙']]]];
+$('#orb').insertAdjacentHTML('beforeend',RINGS.map(([d,s,l],ri)=>'<div class="ring" style="--d:'+d+'vmin;--s:'+s+'s'+(ri==1?';animation-direction:reverse':'')+'">'+l.map((b,i)=>'<div class="bd" style="--d:'+d+'vmin;--a:'+Math.round(360/l.length*i)+'deg;--s:'+s+'s"><div'+(ri==1?' style="animation-direction:reverse"':'')+'><span>'+b[1]+' '+b[0]+'</span></div></div>').join('')+'</div>').join(''));
+const CODE={c1:"const provider = new firebase.auth.GoogleAuthProvider();\nprovider.setCustomParameters({ prompt: 'select_account' });\ntry {\n  await cloudAuth.signInWithPopup(provider);\n} catch (err) {\n  // popup blocked or closed? use the redirect flow\n  await cloudAuth.signInWithRedirect(provider);\n}",
+ c2:"// save(): instant local copy + delayed cloud copy\nlocalStorage.setItem('happyFish2', JSON.stringify(S));\nif (cloudUser) scheduleCloudSave();   // 650 ms debounce\n\nawait db.collection('users').doc(uid).set(\n  { profile: S, updatedAt: serverTimestamp() },\n  { merge: true });",
+ c3:"// firestore.rules\nmatch /users/{userId} {\n  allow get, create, update:\n    if signedIn() && request.auth.uid == userId;\n  allow list: if isAdmin();\n  allow get, update: if isAdmin();\n}"};
+$('#tree').textContent="happyfish/\n├─ index.html     the game page\n├─ styles.css     ocean look\n├─ app.js         game + auth + cloud\n├─ admin.html     owner dashboard\n├─ admin.css\n├─ admin.js\n├─ config.js      Firebase settings\n└─ firestore.rules";
+$('#deploy').innerHTML=[['💻','git push','Upload the files to the repository root'],['🐙','GitHub Pages','Serves the static files for free'],['🔒','HTTPS + custom domain','happyfish.run.place and www'],['🎮','Players','Open the link on any device']].map((d,i)=>'<div class="card" data-a="r" style="display:flex;gap:14px;align-items:center"><span class="ic">'+d[0]+'</span><div><b>'+d[1]+'</b><br><span class="mut">'+d[2]+'</span></div></div>').join('');
+
+/* ---------- SVG: mission map and architecture ---------- */
+const Y=x=>175+105*Math.sin(x/1000*Math.PI*3);
+(function(){let d='M0 '+Y(0);for(let x=8;x<=1000;x+=8)d+=' L'+x+' '+Y(x).toFixed(1);
+  let s='<path d="'+d+'" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="14" stroke-linecap="round"/><path id="mp" d="'+d+'" pathLength="1" fill="none" stroke="#22e4ff" stroke-width="4" stroke-dasharray="1" stroke-dashoffset="1" stroke-linecap="round" class="mdraw"/>';
+  MS.forEach((m,i)=>{const x=50+i*(900/14),y=Y(x),ok=i<7,cur=i==6;s+='<g class="mn" data-i="'+i+'" style="cursor:pointer;opacity:0"><circle cx="'+x+'" cy="'+y+'" r="'+(cur?27:23)+'" fill="'+(ok?(cur?'#0a84ff':'#1bb36b'):'#0a2d5c')+'" stroke="#fff" stroke-opacity="'+(ok?.9:.3)+'" stroke-width="3"'+(cur?' style="filter:drop-shadow(0 0 14px #22e4ff)"':'')+'/><text x="'+x+'" y="'+(y+7)+'" text-anchor="middle" font-size="20" font-weight="700">'+(ok?i+1:'🔒')+'</text>'+(ok&&!cur?'<text x="'+x+'" y="'+(y+44)+'" text-anchor="middle" font-size="13" fill="#ffd54a">★★★</text>':'')+'</g>'});
+  s+='<text id="mf" font-size="34" x="0" y="0">🐠</text>';$('#map').innerHTML=s;
+  const st=document.createElement('style');st.textContent='.on .mdraw{animation:dr 2.6s .5s ease forwards}@keyframes dr{to{stroke-dashoffset:0}}.on .mn{animation:np .6s cubic-bezier(.2,1.6,.3,1) forwards;animation-delay:calc(var(--k)*.15s + .6s);transform-box:fill-box;transform-origin:center}@keyframes np{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:none}}.mn:hover circle{filter:drop-shadow(0 0 12px #ffd54a)}';document.head.appendChild(st);
+  $$('#map .mn').forEach((g,i)=>g.style.setProperty('--k',i));
+  $('#map').onpointerover=e=>{const g=e.target.closest('.mn');if(g){const m=MS[g.dataset.i];$('#mcap').textContent='Mission '+(+g.dataset.i+1)+': '+m[0]+' '+m[1]+'. '+m[2]}}})();
+const AN=[['gh',40,10,230,92,'🐙','GitHub Pages','static hosting + HTTPS'],['br',40,170,230,110,'🌐','Browser','index.html · styles.css · app.js'],['go',385,10,230,92,'🔐','Google Sign-In','account chooser'],['au',385,150,230,92,'🔥','Firebase Auth','uid · email · photo'],['fs',385,290,230,100,'🗄️','Cloud Firestore','users/{uid}/profile'],['ad',730,150,230,110,'🛠️','admin.html','owner dashboard']];
+const AP=[['M155 102 L155 170','files'],['M270 200 C330 120 330 60 385 56','popup'],['M500 102 L500 150','identity'],['M270 225 L385 196','session'],['M270 255 C330 300 330 330 385 340','save / load'],['M845 260 C845 340 720 340 615 340','manage'],['M730 196 L615 196','admin sign-in']];
+$('#arch').innerHTML=AP.map((p,i)=>'<path id="ap'+i+'" d="'+p[0]+'" class="flowp"/>').join('')+AN.map(n=>'<g><rect class="nd" x="'+n[1]+'" y="'+n[2]+'" width="'+n[3]+'" height="'+n[4]+'" rx="18"/><text x="'+(n[1]+n[3]/2)+'" y="'+(n[2]+n[4]/2-4)+'" text-anchor="middle" font-size="21" font-weight="600">'+n[5]+' '+n[6]+'</text><text class="sm" x="'+(n[1]+n[3]/2)+'" y="'+(n[2]+n[4]/2+20)+'" text-anchor="middle">'+n[7]+'</text></g>').join('')+AP.map((p,i)=>[0,1].map(k=>'<circle r="6" fill="#ffd54a" style="filter:drop-shadow(0 0 6px #ffd54a)"><animateMotion dur="2.4s" begin="'+(k*1.2+i*.2)+'s" repeatCount="indefinite"><mpath href="#ap'+i+'"/></animateMotion></circle>').join('')).join('');
+
+/* ---------- live demos ---------- */
+const HK={};
+HK.s4={on(){const cv=$('#demo');let c,W,H;const rs=()=>{[c,W,H]=fit(cv)};rs();
+  const P={x:W/2,y:H/2,r:16,t:0,d:1},N=[],mk=()=>{const r=rnd(7,34),L=Math.random()<.5;return{x:L?-40:W+40,y:rnd(40,H-40),r,v:rnd(.5,1.6)*(L?1:-1),p:PAL[Math.floor(rnd(0,6))],t:rnd(0,6)}};for(let i=0;i<13;i++){const f=mk();f.x=rnd(0,W);N.push(f)}
+  let tx=[],lv=0;HK.s4.f=n=>{c.clearRect(0,0,W,H);let tg=null,th=null,bd=1e9,hd=1e9;
+    N.forEach(f=>{f.x+=f.v;f.t+=.15;const d=Math.hypot(f.x-P.x,f.y-P.y);if(f.r<P.r*.95&&d<bd){bd=d;tg=f}if(f.r>=P.r*.95&&d<hd){hd=d;th=f}if(f.x<-80||f.x>W+80)Object.assign(f,mk())});
+    let vx=0,vy=0;if(th&&hd<P.r*3+th.r*2){vx=P.x-th.x;vy=P.y-th.y}else if(tg){vx=tg.x-P.x;vy=tg.y-P.y}else vy=H/2-P.y;const m=Math.hypot(vx,vy)||1,sp=2.6;P.x=Math.max(20,Math.min(W-20,P.x+vx/m*sp));P.y=Math.max(20,Math.min(H-20,P.y+vy/m*sp));if(vx)P.d=vx>0?1:-1;P.t+=.2;
+    N.forEach((f,i)=>{if(Math.hypot(f.x-P.x,f.y-P.y)<(f.r+P.r)*.6&&f.r<P.r){tx.push({x:f.x,y:f.y,t:'+'+Math.round(f.r),l:40});P.r=Math.min(44,P.r+f.r*.07);Object.assign(f,mk())}});
+    if(P.r>=40){P.r=16;lv++;tx.push({x:W/2,y:H/3,t:'Level up!',l:70})}
+    N.forEach(f=>fishD(c,f.x,f.y,f.r,f.v>0?1:-1,f.p,f.t,f.r<P.r*.95?'#5dffa0':'#ff4d4d'));fishD(c,P.x,P.y,P.r,P.d,['#ffe36b','#ff8a00'],P.t,'#ffd54a');
+    c.font='700 18px Fredoka';c.textAlign='center';tx.forEach(o=>{o.y-=.8;o.l--;c.globalAlpha=Math.max(0,o.l/40);c.fillStyle='#ffd54a';c.fillText(o.t,o.x,o.y)});c.globalAlpha=1;tx=tx.filter(o=>o.l>0);c.fillStyle='#eaf6ff';c.font='600 15px Inter';c.textAlign='left';c.fillText('Level '+(lv+1)+' · size '+Math.round(P.r),12,22)};loops.add(HK.s4.f)},off(){loops.delete(HK.s4.f)}};
+HK.s6={on(){}};
+HK.s7={on(){const p=$('#mp'),f=$('#mf'),L=p.getTotalLength(),t0=performance.now();HK.s7.f=n=>{const u=((n-t0)/9000)%1,q=p.getPointAtLength(L*(.04+u*.4));f.setAttribute('x',q.x-16);f.setAttribute('y',q.y-22)};loops.add(HK.s7.f)},off(){loops.delete(HK.s7.f)}};
+HK.s9={on(){const d=$('#dark'),m=e=>{const r=d.getBoundingClientRect();d.style.setProperty('--x',e.clientX-r.left+'px');d.style.setProperty('--y',e.clientY-r.top+'px');d.dataset.u=1};d.onpointermove=m;const t0=performance.now();HK.s9.f=n=>{if(d.dataset.u)return;const r=d.getBoundingClientRect();d.style.setProperty('--x',r.width*(.5+.4*Math.sin((n-t0)/1300))+'px');d.style.setProperty('--y',r.height*(.5+.35*Math.cos((n-t0)/900))+'px')};loops.add(HK.s9.f)},off(){loops.delete(HK.s9.f)}};
+const TYPERS=[];function typeIn(el,txt){el.textContent='';let i=0;const id=setInterval(()=>{i+=2;el.textContent=txt.slice(0,i);if(i>=txt.length){clearInterval(id);el.innerHTML=hl(txt)}},16);TYPERS.push(id)}
+const cycle=(sel,ms)=>{let i=0;const el=$$(sel);const id=setInterval(()=>{el.forEach((e,k)=>e.classList.toggle('hi',k===i%el.length));i++},ms);return id};
+const CY={};
+HK.s5={on(){CY.a=cycle('#lsteps .step',1700)},off(){clearInterval(CY.a)}};
+HK.s13={on(){CY.b=cycle('#asteps .step',1700);setTimeout(()=>typeIn($('#c1'),CODE.c1),900)},off(){clearInterval(CY.b);TYPERS.forEach(clearInterval)}};
+HK.s14={on(){setTimeout(()=>{typeIn($('#c2'),CODE.c2);typeIn($('#c3'),CODE.c3)},900)},off(){TYPERS.forEach(clearInterval)}};
+
+/* ---------- navigation, timer, notes ---------- */
+let cur=-1,t0=0;
+function count(e){const to=+e.dataset.count,suf=e.dataset.suf||'',s=performance.now();(function f(n){const p=Math.min(1,(n-s)/1400);e.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString()+suf;if(p<1)requestAnimationFrame(f)})(s)}
+function go(n){n=Math.max(0,Math.min(slides.length-1,n));if(n===cur)return;
+  if(cur>=0){slides[cur].classList.remove('on');const o=HK[slides[cur].id];if(o&&o.off)o.off()}
+  slides.forEach((s,i)=>s.classList.toggle('past',i<n));slides[n].classList.add('on');slides[n].scrollTop=0;cur=n;
+  $('#prog i').style.width=n/(slides.length-1)*100+'%';$('#ct').textContent=(n+1)+' / '+slides.length;$('#nt').innerHTML='<b>'+NOTES[n][0]+' min</b> · '+NOTES[n][1];
+  $$('[data-count]',slides[n]).forEach(count);const h=HK[slides[n].id];if(h&&h.on)h.on();
+  if(!t0&&n>0)t0=Date.now();history.replaceState(null,'','#s'+(n+1))}
+const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+setInterval(()=>{if(t0){const s=Math.floor((Date.now()-t0)/1000);$('#tm').textContent='⏱ '+fmt(s)+' / 20:00';$('#tm').style.color=s>1200?'#ff6b6b':s>1080?'#ffd54a':'#eaf6ff'}},500);
+$('#nx').onclick=()=>go(cur+1);$('#pv').onclick=()=>go(cur-1);
+$('#fs').onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()};
+addEventListener('keydown',e=>{const k=e.key;if(k==='ArrowRight'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();go(cur+1)}else if(k==='ArrowLeft'||k==='PageUp'){go(cur-1)}else if(k==='Home')go(0);else if(k==='End')go(slides.length-1);
+  else if(k==='f'||k==='F')$('#fs').click();else if(k==='t'||k==='T')$('#tm').style.display=$('#tm').style.display==='block'?'none':'block';else if(k==='n'||k==='N')$('#nt').style.display=$('#nt').style.display==='block'?'none':'block'});
+let sx=0;addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>60)go(cur+(dx<0?1:-1))});
+addEventListener('click',e=>{if(e.target.closest('a,button,#nav,#emo,.mc,.mn,#dark,pre,table'))return;if(e.clientX>innerWidth*.5)go(cur+1)});
+const m=/^#s(\d+)$/.exec(location.hash);go(m?+m[1]-1:0);
+</script>
+</body>
+</html>
