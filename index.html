@@ -1,118 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Happy Fish</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<title>Happy Friends – Meet, chat, make friends</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="loader"><div class="lf">🐟</div><div class="lb"><i id="lp"></i></div><div class="lt" id="lt">Loading ocean… 0%</div></div>
-<div class="bg"></div><div class="rays"></div>
-<div class="sea">
-  <div class="coral" style="left:5%;width:25px;height:90px;background:linear-gradient(to top,#ff416c,#ff4b2b)"></div>
-  <div class="coral" style="left:8%;width:18px;height:65px;background:linear-gradient(to top,#8a2be2,#4a00e0);animation-delay:1s"></div>
-  <div class="coral" style="right:7%;width:30px;height:100px;background:linear-gradient(to top,#00c6ff,#0072ff);animation-delay:.5s"></div>
-  <div class="coral" style="right:12%;width:20px;height:75px;background:linear-gradient(to top,#f857a6,#ff5858);animation-delay:1.5s"></div>
-</div>
-<canvas id="c"></canvas>
-
-<div class="hud" id="hud">
-  <div class="pill glass"><small>Score</small><span id="sc">0</span></div>
-  <div class="pill glass mid"><small id="mn"></small><div id="goal" style="font-size:.95rem"></div><div class="bar"><i id="bar"></i></div><small id="pt" style="margin-top:3px"></small></div>
-  <div class="pill glass" style="text-align:right"><small id="sg"></small><span id="hp"></span><br><button id="pb">⏸ Pause</button></div>
-</div>
-<div class="banner" id="banner"></div>
-
-<div class="wrap" id="menu"><div class="card glass float">
-  <div class="logo">🐠</div><h1>HAPPY FISH</h1>
-  <p class="sub">Dive into the deep blue ocean adventure! 15 missions are waiting.</p>
-  <button class="btn g" id="googleLogin"><span class="ic">G</span>Continue with Google</button>
-  <button class="guest" data-login>Play as guest ›</button>
-</div></div>
-
-<div id="home">
-  <div class="nav glass">
-    <div class="pf"><button class="av" id="avb" aria-label="Open my profile">🐠</button><div><b id="pname">Happy Fisherman</b><small id="rank"></small></div></div>
-    <div class="stats"><div class="badge">🪙 <span id="coins">0</span></div><div class="badge">💎 <span id="gems">0</span></div></div>
+<!-- WELCOME PAGE -->
+<section id="welcome">
+  <header class="top">
+    <a class="logo" href="index.html" aria-label="Happy Friends home"><img src="logo.svg?v=2" width="42" height="42" alt="" onerror="this.style.display='none'"><span class="brand-word"><span>Happy</span><b>Friends</b></span></a>
+    <div class="row">
+      <a class="btn ghost" href="freesites.html">Free Websites</a><button class="icon" id="themeBtn" title="Change theme">🌙</button>
+      <button class="btn ghost" data-login>Log in</button>
+      <button class="btn" data-login>Sign in</button>
+    </div>
+  </header>
+  <div class="hero">
+    <h1>Say hi. Make a <span class="rot">friend</span> today.</h1>
+    <p>Public chat rooms, private messages, 24-hour stories and daily coin rewards. Free to join with Google. 18+ only.</p>
+    <button class="btn big pulse" data-login>Continue with Google</button><p id="authStatus" hidden style="margin:12px auto;color:var(--mut);font-size:13px">Connecting to Happy Friends…</p><div style="margin-top:12px"><button class="btn ghost" id="guestJoin">Join as Guest</button></div>
+    <div class="bubbles"><i>👋</i><i>💬</i><i>🎁</i><i>📸</i><i>😊</i></div>
   </div>
-  <div class="mt"><h1>SELECT MISSION</h1><p class="sub">Swim down the reef. Every mission is longer and harder than the last.</p></div>
-  <div class="map" id="map"></div>
-  <div class="about-game-wrap">
-    <a class="about-game-btn" href="about.html" aria-label="Learn more about Happy Fish game">
-      <span class="about-game-icon">📖</span>
-      <span class="about-game-copy"><strong>About This Game</strong><small>Discover the ocean adventure</small></span>
-      <span class="about-game-arrow">›</span>
-    </a>
+</section>
+
+<!-- APP -->
+<section id="app" hidden>
+  <header class="top">
+    <button class="icon" id="usersBtn" title="Online users">👥</button>
+    <a class="logo sm" href="index.html" aria-label="Happy Friends home"><img src="logo.svg?v=2" width="34" height="34" alt="" onerror="this.style.display='none'"><span class="brand-word"><span>Happy</span><b>Friends</b></span></a>
+    <div class="row">
+      <a class="btn ghost sm" href="freesites.html">Free Websites</a><button class="btn vip-btn sm" id="vipBtn">⭐ Get VIP</button>
+      <button class="coin" id="coinBtn">🪙 <b id="coins">0</b></button>
+      <button class="icon" id="themeBtn2">🌙</button>
+      <img id="meImg" class="av" alt="me">
+    </div>
+  </header>
+  <div class="stories" id="stories"></div>
+  <div class="layout">
+    <aside id="side">
+      <h3>Rooms</h3>
+      <div id="rooms"></div>
+      <div class="row wrap"><button class="btn sm" id="newRoom">+ Room (50🪙)</button><button class="btn sm alt" id="randomBtn">🎲 Random chat</button></div>
+      <h3>Private Inbox</h3><div id="dmInbox" class="dm-inbox"></div>
+      <h3>Users <small class="legend"><i class="dot on"></i>online <i class="dot away"></i>away <i class="dot off"></i>offline</small></h3>
+      <div id="users"></div>
+    </aside>
+    <main>
+      <div class="chathead"><b id="roomName"># Public chat</b><button class="icon" id="wallBtn" title="Wallpaper">🖼️</button></div>
+      <div id="msgs"></div>
+      <form id="sendForm">
+        <label class="icon">📷<input type="file" id="chatImg" accept="image/*" hidden></label>
+        <input id="msgIn" placeholder="Type a message…" autocomplete="off">
+        <button class="btn">Send</button>
+      </form>
+    </main>
   </div>
-</div>
+  <nav class="bottom"><button id="tProfile">👤 Profile</button><button id="tStory">➕ Story</button><button id="tReward">🎁 Rewards</button><button id="tOut">🚪 Log out</button></nav>
+</section>
 
-<button id="mute" aria-label="Sound on or off">🔊</button>
 
-<div class="wrap dim" id="me"><div class="card glass profile-card">
-  <h2 id="profileHeading" style="margin-bottom:14px">My Profile</h2>
-  <div class="av" id="mav" style="width:110px;height:110px;font-size:3.4rem;margin:0 auto 10px"></div>
-  <input id="mnm" maxlength="16" placeholder="Player name" style="width:100%;padding:11px;border-radius:16px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;font-size:1.2rem;text-align:center">
-  <p class="sub" id="mrank" style="margin:6px 0 10px"></p>
-  <label class="btn alt" style="cursor:pointer">📁 Upload a picture<input type="file" accept="image/*" id="mfile" hidden></label>
-  <p class="sub" style="margin:0">Or pick a fish</p><div class="emo" id="emo"></div>
-  <h2 style="font-size:1.25rem">My results</h2><div class="stt" id="mst"></div>
-  <h2 style="font-size:1.05rem">Mission stars</h2><div class="stt five" id="mres"></div>
-  <button class="btn play" id="msave">Save profile</button><button class="btn alt" id="mback">Back to map</button>
-</div></div>
+<footer id="siteFooter" class="site-footer">
+  <div class="footer-brand"><a class="logo footer-logo" href="index.html"><img src="logo.svg?v=2" width="54" height="54" alt=""><span class="brand-word"><span>Happy</span><b>Friends</b></span></a><small>© <span id="footerYear"></span> Happy Friends</small></div>
+  <div class="footer-right"><p>Meet new people, make friends and stay connected with Happy Friends.</p><nav id="socialLinks" class="social-links" aria-label="Social media"></nav></div>
+</footer>
 
-<div class="wrap dim" id="reward"><div class="card glass">
-  <div class="logo gold">🎁</div><h2>WELCOME!</h2><p class="sub">Here is your underwater starter bonus.</p>
-  <div class="rw"><span>🪙 +1,250</span><span>💎 +45</span></div>
-  <button class="btn play" id="claim">Claim reward ✔</button>
-</div></div>
+<!-- MODAL (shared) -->
+<div id="modal" hidden><div class="card" id="modalBody"></div></div>
+<div id="toast"></div>
 
-<div class="wrap dim" id="brief"><div class="card glass">
-  <h2 id="bt"></h2><p class="sub" id="bd"></p><ul class="stl" id="bl"></ul>
-  <button class="btn play" id="go">Start mission</button><button class="btn alt" id="bx">Back</button>
-</div></div>
-
-<div class="wrap dim" id="pause"><div class="card glass"><h1 id="ptt">Paused</h1><p class="sub" id="psub">The ocean will wait.</p>
-  <button class="btn play" id="resume">Resume</button><button class="btn alt" id="quit">Back to map</button></div></div>
-
-<div class="wrap dim" id="perm"><div class="card glass">
-  <div class="logo">🎥</div><h2>Camera and microphone</h2>
-  <p class="sub">Mission gates can read your answer from the fingers you hold up (camera) or from your claps (microphone). Everything is processed on your device. Nothing is recorded or sent anywhere.</p>
-  <button class="btn play" id="pallow">Allow camera and microphone</button>
-  <p class="sub" id="pm2" style="min-height:1.4em;margin:0 0 10px"></p>
-  <button class="btn alt" id="pno">Not now, I will type my answers</button>
-</div></div>
-
-<div class="wrap dim" id="gate"><div class="card glass" style="max-width:440px">
-  <h2>Access gate</h2><p class="sub" id="gs" style="margin-bottom:4px"></p><p class="sub" id="gh" style="font-size:.85rem;margin-top:0"></p>
-  <div style="display:flex;justify-content:space-between;font-weight:600;font-size:.95rem"><span id="gr"></span><span id="gk"></span></div>
-  <div class="bar" style="margin:5px 0 10px"><i id="gb" style="width:100%"></i></div>
-  <canvas id="gc" class="pzc"></canvas>
-  <div id="gin"><input id="ga" type="number" inputmode="numeric" min="0" max="99" placeholder="Type your answer">
-    <button class="btn play" id="gok">Check answer</button></div>
-  <button class="btn alt" id="gretry" style="display:none">↻ Retry loading question</button>
-  <div id="ghw" style="display:flex;gap:8px"><button class="btn alt" id="gcam" style="font-size:.85rem;padding:10px">📷 Show fingers</button><button class="btn alt" id="gmic" style="font-size:.85rem;padding:10px">🎤 Clap the count</button></div>
-  <div id="gvw" style="display:none;position:relative;width:200px;margin:0 auto 8px;transform:scaleX(-1)"><video id="gv" playsinline muted style="width:100%;border-radius:12px;display:block"></video><canvas id="gov" width="200" height="150" style="position:absolute;inset:0;width:100%;height:100%"></canvas></div>
-  <div id="glw" class="bar" style="display:none;margin:0 0 8px"><i id="gl"></i></div>
-  <button class="btn alt" id="gcal" style="display:none;font-size:.85rem;padding:10px">🎯 Calibrate to my hand</button>
-  <p class="sub" id="gm" style="min-height:1.4em;margin:4px 0 10px"></p>
-  <button class="btn alt" id="gback">Back to map</button>
-</div></div>
-
-<div class="wrap dim" id="over"><div class="card glass">
-  <div class="logo" id="oi">🦈</div><h2 id="ot"></h2><div class="big" id="os"></div>
-  <p class="sub" id="od"></p>
-  <button class="btn play" id="next">Next mission</button>
-  <button class="btn play" id="continueCoins" style="display:none;background:linear-gradient(135deg,#f6a623,#d97706)">🪙 Continue — 500 coins</button>
-  <button class="btn play" id="continueGems" style="display:none;background:linear-gradient(135deg,#a855f7,#6d28d9)">💎 Continue — 10 gems</button>
-  <button class="btn alt" id="retry">Retry</button><button class="btn alt" id="omap">Mission map</button>
-</div></div>
-
-<script src="config.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
