@@ -7,5 +7,5 @@ window.FIREBASE_CONFIG = {
   messagingSenderId: "PASTE_MESSAGING_SENDER_ID",
   appId: "PASTE_FIREBASE_APP_ID"
 };
-window.HAPPY_FISH_ADMIN_EMAIL = "YOUR_ADMIN_GOOGLE_EMAIL";
+window.HAPPY_FISH_ADMIN_EMAIL = "gizmogamingboy@gmail.com";
 window.HAPPY_FISH_ADMIN_PASSWORD = "00000000";
